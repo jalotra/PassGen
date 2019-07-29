@@ -25,6 +25,13 @@ def writePasswordsToFile(outputFile, passwords):
 	print '%s passwords written to %s' % (len(passwords), outputFile)
 	f.close()
 
+#Method to append to file
+def appendPasswordsToFile(outputFile, passwords):
+	with open(outputFile, 'a') as f:
+		f.write('\n'.join(passwords))
+	print '%s passwords written to %s' % (len(passwords), outputFile)
+	f.close()
+
 def makeRequests(target, data, passwords, findText):
 	print("testing passwords... this may take a while.")
 	for password in passwords:
@@ -45,6 +52,9 @@ if __name__ == '__main__':
 	parser.add_argument("-d", "--data", help="The data for the post request.")
 	parser.add_argument("-g", "--search", help="The text to search for in POST respose that will indicate a successful login.")
 	parser.add_argument("password",nargs="*")
+	#New Argument to append the file
+	parser.add_argument("-a", "--append",help = "Use it to append to the same $outputFile if you run the passgen a number of times for with different tags\n.But is you want passwords for different names you can use names as a list\n"
+							, action = "show_true")
 	args = parser.parse_args()
 
 	password = args.password[0]
@@ -58,8 +68,12 @@ if __name__ == '__main__':
 		passwords = basicSub(password)
 
 	#save passwords to file
-	if args.outputFile != None:
+	if args.outputFile != None and args.append == False:
 		writePasswordsToFile(args.outputFile, passwords)
+	#append passwords to file
+	if args.outputFile != None and args.append != False :
+		appendPasswordsToFile(args.outputFile, passwords)
+
 	#copy passwords to clipboard
 	elif args.copy:
 		writePasswordsToClipboard(passwords)
