@@ -54,7 +54,7 @@ if __name__ == '__main__':
 	parser.add_argument("password",nargs="*")
 	#New Argument to append the file
 	parser.add_argument("-a", "--append",help = "Use it to append to the same $outputFile if you run the passgen a number of times for with different tags\n.But is you want passwords for different names you can use names as a list\n"
-							, action = "show_true")
+							, action = "store_true")
 	args = parser.parse_args()
 
 	password = args.password[0]
@@ -71,7 +71,7 @@ if __name__ == '__main__':
 	if args.outputFile != None and args.append == False:
 		writePasswordsToFile(args.outputFile, passwords)
 	#append passwords to file
-	if args.outputFile != None and args.append != False :
+	elif args.outputFile != None and args.append != False :
 		appendPasswordsToFile(args.outputFile, passwords)
 
 	#copy passwords to clipboard
