@@ -17,6 +17,7 @@ Complete list of options:
 - -g : Text to search for in the HTTP response.  Use this to determine when a password has worked.
 - -n : Append numbers flag.  Appends the numbers 0-9999 to the end of all passwords
 - -c : Copy to clipboard flag.  Copys results to the clipboard
+- -a :  Appends the outputFile . If you run the passgen.py a number of times with different tags and names then use -a to append newly generated passwords to the same outputFile\n
 
 ## Examples:
 ### Basic Usage:
